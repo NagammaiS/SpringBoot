@@ -1,0 +1,52 @@
+WHAT IS JPA :
+SPRING DATA JPA : DATA TIER 
+
+JAVA PERSISTENCE API - JPA 
+JPA-> Lets us to do ORM . (Object Relational Mapping)
+Most of the Databases used in production are Sequel Database , nowadays NOSQL is used 
+SQL ->Relational Database 
+Connection of a java application to a Relational Database needs a JDBC , run SQL queries which run on database ,
+then we get the result and converts it into object instances  
+
+ORM -> maps entity classes into SQL tables 
+When we connect to database we provide some metadata to entity classes so we don't need to do the mapping and query ourself
+framework handles it for us i.e ORM 
+
+JPA -> Way to use ORM lets us to configure the entity classes and provide it to framework and it does the rest
+
+Spring Data JPA -> Makes it more easier with configuration 
+
+
+S1: Dependencies added 
+S2 : @Entity and @Id 
+S2: Extends CRUD Repsoitory 
+S3: Writes some service methods for CRUD with pre-implemented methods 
+S4: It works 
+No need additional dependencies for database 
+
+
+Refer tutorial 30 and 31 in the javabrains video for Course API 
+Refer 32 for  building 
+
+
+SPRING BOOT ACTUATOR :
+Add the dependency spring-boot-starter-actuator in pom.xml without us writing the controller ,
+actuator gives us some controller endpoints
+Application.properties :
+management.port : 9001 
+This gives us the actuator related result in differnet port 
+
+
+GET Method http://localhost:9001/health
+
+gives a JSON object as output 
+status:"UP"
+...
+"db":{
+status:UP
+database:apache database}
+
+
+GET Method http://localhost:9001/beans
+Gives us the beans which are created in the application 
+topicService ,
