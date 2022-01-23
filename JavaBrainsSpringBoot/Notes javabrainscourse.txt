@@ -1,0 +1,78 @@
+Embedded Tomcat Server :
+
+We dont need to download a tomcat server to run our application , no need to find a servlet container and deploy it.
+
+* Convenience -> no need to download 
+* Servlet container config is now application config -> servlet container configuration steps is required when deploying something to tomcat
+* Standalone application ->easy to develop , deploy and run , goal of spring boot 
+* Useful for microservices architecture -> 10 different microservices applications need to deploy seperately with additional steps , with a command we can start the application
+
+
+
+
+
+Spring MVC Controller :
+View -> View tier is handled by framework Spring MVC , which lets's you build these controllers which map requests to responses 
+Controllers -> simple java classes which maps a URI  and a HTTP method to some functionality (Java method)
+it has two annotations  
+1) URI 
+2)HTTP method 
+When the request comes in Spring MVC framework looks at the URI and the HTTP request type , then examines the lists of controllers it has in the class path 
+and checks if any of the method has this URI and http method if present it maps and executes the method and return type to a proper response and sends 
+it back (JSON response)
+In Topic controller we returned a list we didn't change to json but Spring MVC detected that it was a REST controller and conversion is done to JSON 
+Spring MVC returns the right response based on the request
+
+
+
+
+Resources of REST API :
+Things in domain ,Nouns,Entities
+COURSE API 
+
+Topics is the resource :  (/topics root URL has to be the resource name but in plural)
+   GET 		/topics			Gets All Topic
+   GET		/topics/id		Gets the Topic
+   POST		/topics			Create new Topic
+   PUT 		/topics/id		Updates the topic
+   DELETE	/topics/id		Deletes the topic 
+   
+   
+   
+   
+Booting Spring Boot :
+Starting Spring Boot in 4 ways:
+
+		1: Spring Initialzr 
+		2: Spring Boot CLI
+		3: STS IDE (Maven Project and Spring Boot starter  project)
+Configuration
+
+
+Application.properties can be used to change the  opiniontaed values of spring eg server port
+Can see the key names in Common Application properties in Internet under 
+https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html
+   
+   
+@SpringBootApplication => Spring boot allows developer to use a single annotation instead of using multiple. But as we know Spring provided loosely coupled
+features that we can use for each individual annotation as per our project needs.
+If interviewer asks how to run a application without @SpringBootApplication annotation then we must use the three annotations seperately 
+
+@ComponentScan =>
+While developing an application, we need to tell the Spring framework to look for Spring-managed components.
+@ComponentScan enables Spring to scan for things like configurations, controllers, services, and other components we define.
+In particular, the @ComponentScan annotation is used with @Configuration annotation to specify the package for Spring to scan for components.
+This annotation scans the base package (the package under which this class resides) and creates beans of other annotated java components like components, configurations, and services.
+This is equivalent to Spring's XML configuration <context:component-scan/>. 
+It will scan the root or base packages where your main class annotated with @SpringBootApplication is located and all its sub-packages.
+
+
+@EnableAutoConfiguration annotation enables Spring Boot to auto-configure the application context. 
+Therefore, it automatically creates and registers beans based on both the included jar files in the classpath and the beans defined by us.
+For example, when we define the spring-boot-starter-web dependency in our classpath, Spring boot auto-configures Tomcat and Spring MVC.
+However, this auto-configuration has less precedence in case we define our own configurations.Dispatcher Servlet , View Resolver Autoconfiguration classes
+This annotation auto-configures all the beans based on classpath dependencies.  For example, since you have included spring-core dependency in your classpath via spring-boot-starter, 
+the auto-configuration assumes that you are creating a Spring core application and set up Spring accordingly.
+
+@Configuration => We use in Java based configuration . We do the bean configurations here @Bean
+This annotation tags a class as a configuration class. This annotation is equivalent to defining beans in an XML configuration file.

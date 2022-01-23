@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.nagammai.springboot</groupId>
+  <artifactId>JavaBrainsSpringBoot</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  
+  <!-- if only parent is present without the dependencies below maven libraries are not found in project explorer  -->
+  <!-- this parent just informs what VERSION of maven dependencies has to be downloaded  ,when dependencies are added they decide WHAT JARS has to be downloaded -->
+  <!-- the embedded tomcat jar version is 9.0 if we change the parent version it will change accordingly -->
+  <parent>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-parent</artifactId>
+   <version>2.6.2</version>
+  </parent>
+  
+  <!-- BILL OF MATERAILS : this is the group of jars with certain version which work well together , only parent version has to change -->
+  
+  <!-- group of dependencies together required for spring mvc -->
+  <dependencies>
+  	<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+	</dependency>
+	
+	<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+	</dependency>
+	
+			<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	
+  </dependencies>
+  
+  <properties>
+  <java-version>1.8</java-version>
+  </properties>
+  
+</project>
