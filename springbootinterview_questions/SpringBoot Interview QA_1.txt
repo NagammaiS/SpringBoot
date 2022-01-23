@@ -1,0 +1,86 @@
+Difference between @RestController and @Controller 
+
+To answer this first we need to understand difference between WEB APPLICATION and REST API 
+Its that  the reponse from a web application  is generally view (HTML+CSS+Javascript) because they are intended for human viwers 
+REST API just returns data in form of JSON or XML because most of the REST clients are programs 
+
+Same goes with @RestController and @Controller annotation 
+
+@Controller map of the model object and view or template and makes it human readable 
+@RestController simply returns the object data directly written into HTTP response as JSON or XML 
+
+
+
+-------------
+What is @RestController?
+@RestController(Spring 4) = > @ResponseBody + @Controller(Spring 2.5)
+It is a convenience annotation for creating Restful controllers . It converts response into JSON or XML which eliminates the need to annotate every request handling method of the controller with @ResponseBody annotation
+
+@RequestBody annotation maps the HttpRequest body to a transfer or domain object, enabling automatic deserialization of the inbound HttpRequest body onto a Java object.
+Spring automatically deserializes the JSON into a Java type,
+@RequestBody annotation binds the HTTPRequest body to the domain object. Spring framework automatically de-serializes incoming HTTPRequest to the Java object using Http Message Converters .
+the @RequestBody annotation allows us to retrieve the request’s body and automatically convert it to Java Object
+
+@ResponseBody annotation tells a controller that the object returned is automatically serialized into JSON and passed back into the HttpResponse object.
+@ResponseBody tell Spring framework to serialize a return object into JSON or XML and send this information back as part of the HTTPResponse.
+With Spring 4.x, If we are using working on the REST API, we should not use @ResponseBody on method level, but @RestController on a class level
+
+@Controller 
+@ResponseBody
+public class UserController{
+
+	@RequestMapping(value="/auth" , method = RequestMethod.POOST , produces ="application/json")
+	public InfoBean authenticate(@RequestBody UserBean userbean){
+
+	System.out.println(userbean.getUserName());
+	System.out.println(userbean.Password());
+
+	InfoBean info = new InfoBean();
+	info.setUserName(userbean.getUserName());
+	info.setPassword(userbean.Password());
+
+	return info 
+
+	}
+}
+
+
+If @RequestBody is not used from postman if we sent the request in Json format , Java cannot understand it so it prints null in console 
+So @RequestBody converts JSON into Java understandable object 
+
+@ResponseBody converts our Java object into client required format , from outside world the client sends data in JSON and it can understand only JSON it cannot understand Java so must convert and send it .
+
+Can be used as return type to 
+public @ResponseBody authenticate .....
+
+If we use produces="application/xml"
+output will be like 
+<InfoBean>
+<userName>666</userName>
+<password>444</password>
+</InfoBean>
+
+@RestController can be used instead of @Controller and @ResponseBody from Spring 4 it will give same output 
+------------------
+
+@Controller
+@RequestMapping("/api")
+public class EmployeeController{
+
+	@RequestMapping(value="/create" , method=RequestMethod.POST)
+	public ModelAndView createEmployee(){
+	
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/get" , method=RequestMethod.GET)
+	public Employee getEmployee(){
+	}
+}
+
+Here in this createEmployee returns a complete HTML view as output in the mvc application = > complete UI 
+getEmployee is a REST API then it must return a JSON/XML as output(complete HTTPResponse) , to mark it as a REST API must include @ResponseBody, if we don't mark it must return a complete View 
+
+when we have a application when it should have both type of methods then must differentiate REST API using this 
+
+In modern days we have mostly Rest API we have different team for UI so we can mark the class with @RestController and return the JSON UI Team can take the JSON and work with it . Now if we use @RequestBody then we must use everytime for all methods so it is combined with @Controller and marked as @RestController 

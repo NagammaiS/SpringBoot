@@ -1,0 +1,64 @@
+1. Why we should avoid the Spring Boot framework ?
+SB enables production ready application , takes care of configuration , embedded Tomcat server , need to worry  about business logic rest of the things are carried out by Spring Boot , makes developers life easy .
+
+SB unnecessarily increase the size of the build with unused dependencies , jar and war file size is large which is produced
+It's only suitable for microservices which is eventually  need to deploy in docker, but not for large or monolithic web services 
+
+
+2. How SB works internally ?
+The entry point of SB application is a class which contains @SpringBootApplication annotation which has the main method.
+SB scans all the components included in the project by using @ComponentScan annotation which is part of the @SpringBootApplication annotation 
+Using @EnableAutoConfiguration annotation the SB appln configures the spring boot application automatically 
+Lets say we need Spring and JPA for database connection then we no need to add the individual dependency, we can simply add the spring-boot-starter-data-jpa in the project 
+SB follows the naming convetion for dependency like spring-boot-starter.
+
+
+3.What is Spring boot starter ?
+It comprises of templates which provide a Rapid Application Development , spring boot starter contains a combinationof all relevant taransitive dependencies.
+	It is a jar file which predeminantly solves the auto-dependency resolution in a SB appln.
+	SB starter follows the unified pattern , like every dependency  start with spring-boot-starter-X wherre X will be name of dependency
+	For eg - if we add  spring-boot-starter-web the spring boot starter will resolve and download all the associated dependencies and add to the application
+	Sb also checks and resolves the transitive dependencies internally
+	
+4. What are the major starter dependencies of SB appln.
+
+SpringBoot Application starters(only few mentioned many are there)
+spring-boot-starter-parent => provides default configuration for our application and complete dependency tree to quickly build our SB project
+Provides default configuration for Maven plugins 
+spring-boot-starter =>	Core starter, including auto-configuration support, logging, and YAML
+spring-boot-starter-aop	=> Starter for aspect-oriented programming with Spring AOP and AspectJ
+spring-boot-starter-data-jpa =>	Starter for using Spring Data JPA with Hibernate (in-memory databases H2, HSQLDB, and Derby)
+spring-boot-starter-security =>	Starter for using Spring Security , SB automatically secures all HTTP endpoints with basic authentication
+spring-boot-starter-test =>	Starter for testing Spring Boot applications with libraries including JUnit Jupiter, Hamcrest and Mockito
+spring-boot-starter-web	=>Starter for building web, including RESTful, applications using Spring MVC. Uses Tomcat as the default embedded container.
+
+SpringBoot Production Starters(only one) 
+spring-boot-starter-actuator =>	Starter for using Spring Boot’s Actuator which provides production-ready features to help you monitor and manage your application
+
+SpringBoot Technical starters (only 6)
+spring-boot-starter-jetty=>	Starter for using Jetty as the embedded servlet container. An alternative to spring-boot-starter-tomcat
+spring-boot-starter-log4j2=> Starter for using Log4j2 for logging. An alternative to spring-boot-starter-logging
+spring-boot-starter-logging=> Starter for logging using Logback. Default logging starter
+spring-boot-starter-reactor-netty=>	Starter for using Reactor Netty as the embedded reactive HTTP server.
+spring-boot-starter-tomcat=>Starter for using Tomcat as the embedded servlet container. Default servlet container starter used by 	      spring-boot-starter-web
+spring-boot-starter-undertow=> Starter for using Undertow as the embedded servlet container. An alternative to spring-boot-starter-tomcat
+
+
+5. What is auto-configuration in SB application?
+The Spring Boot autoconfiguration represents a way to automatically configure a Spring application based on the jar dependencies that are present on the classpath.
+This can make development faster and easier by eliminating the need for defining certain beans that are included in the auto-configuration classes.
+You need to opt-in to auto-configuration by adding the @EnableAutoConfiguration or @SpringBootApplication annotations to one of your @Configuration classes.
+
+For example, If HSQLDB is on your classpath, and you have not manually configured any database connection beans, then we will auto-configure an in-memory database.
+For example, if the H2 database Jar is present in the classpath and we have not configured any beans related to the database manually, the Spring Boot's auto-configuration feature automatically configures it in the project.
+
+
+6. Important annotations of Spring Boot 
+@RestController 
+@RequestMapping
+@PathVariable 
+@RequestParam
+@Responsibility 
+@ResponseEntity 
+@GetMapping
+@ResponseBody 
